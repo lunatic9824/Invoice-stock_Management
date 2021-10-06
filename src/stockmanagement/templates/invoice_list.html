@@ -1,0 +1,108 @@
+{% load static %}
+{% include 'navbar.html' %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>list items</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
+    
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+
+  </head>
+  <body>
+      <div class="jumbotron">
+        <div class="header">
+    {{ cust.cust_name }}<br>
+    <h3>{{ cust.contact_num }}</h3></div>
+<div class="widget-content">
+    <table class="table table-striped table-bordered footable footable-1 breakpoint-lg" data-footable="" data-toggle-column="last" style="display: table;">
+        <thead>
+            <tr class="footable-header">
+
+                <th style="display: table-cell;">
+                    <center>Invoice No.</center>
+                </th>
+                <th style="display: table-cell;">
+                    <center>Date</center>
+                </th>
+
+                <th style="display: table-cell;">
+                    <center>Total Products</center>
+                </th>
+                
+                <th style="display: table-cell;">
+                    <center>Add Products</center>
+                </th>
+                
+
+                <th style="display: table-cell;">
+                    <center>Total</center>
+                </th>
+                
+                <th style="display: table-cell;">
+                    <center>Action</center>
+                </th>
+                <th style="display: table-cell;">
+                    <center>Print</center>
+                </th>
+                <th style="display: table-cell;">
+                    <center>View</center>
+                </th>
+           
+        </thead>
+        <tbody>
+            {% for inv,pr,pt in invo %}
+            <tr>   
+                <td style="display: table-cell;"><center><a href="#">{{ inv.Invoice_num }}</a></center></td>
+                <td style="display: table-cell;"><center>{{ inv.Date }}</center></td>
+                <td style="display: table-cell;"><center>{{ pr }}</center></td>
+                <td style="display: table-cell;"><center><a href="{% url 'productform' %}"> Add Product</a></center></td>
+                <td style="display: table-cell;"><center>{{ pt }}</center></td>
+                
+                <td class="td-actions footable-last-visible" style="display: table-cell;">
+                    <a href="{% url 'InvoDel' inv.Invoice_num %}" class="btn btn-danger" value="Delete" name="btndelete">
+                    <i class="btn-icon-only fa fa-trash-o"> </i>Delete</button></td>
+                </center>  
+            </td>
+            <td class="td-actions footable-last-visible" style="display: table-cell;">
+                <a href="{% url 'PDFs' inv.Invoice_num %}">Print</a></td>
+                <td class="td-actions footable-last-visible" style="display: table-cell;">
+                    <a href="{% url 'view_invoice' inv.Invoice_num %}">view</a></td>
+             
+            </tr>
+            {% endfor %}
+        </tbody>
+
+</div>
+</div>
+
+
+</body>
+</html>
